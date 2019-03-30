@@ -5,7 +5,19 @@ import {Provider} from 'react-redux';
 import reducers from './reducers'
 import './index.css';
 import App from './App';
+import About from './about/About.js';
 import * as serviceWorker from './serviceWorker';
+
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
+
+const routing = (
+    <Router>
+        <div>
+            <Route path="/" component={App} />
+            <Route path="/about" component={About} />
+        </div>
+    </Router>
+);
 
 
 const store = createStore(reducers);
