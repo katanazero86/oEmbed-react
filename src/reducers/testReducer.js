@@ -15,5 +15,4 @@ export default function test (state = initialState, action) {
         default :
             return initialState;
     }
-
 }
