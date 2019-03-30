@@ -5,27 +5,39 @@ import {Provider} from 'react-redux';
 import reducers from './reducers'
 import './index.css';
 import App from './App';
-import About from './about/About.js';
+import About from './about/About';
+import Header from './header/Header';
+import Footer from './footer/Footer';
 import * as serviceWorker from './serviceWorker';
 
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
-
-const routing = (
-    <Router>
-        <div>
-            <Route path="/" component={App} />
-            <Route path="/about" component={About} />
-        </div>
-    </Router>
-);
-
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 const store = createStore(reducers);
 
-ReactDOM.render(
+const root = (
     <Provider store={store}>
-        <App/>
-    </Provider>,
+        <Router>
+            <Header/>
+            <div>
+                <Switch>
+                    <Route path="/" exact component={App}/>
+                    <Route path="/about" component={About}/>
+                </Switch>
+            </div>
+            <Footer/>
+        </Router>
+    </Provider>
+);
+
+// ReactDOM.render(
+//     <Provider store={store}>
+//         <App/>
+//     </Provider>,
+//     document.getElementById('root')
+// );
+
+ReactDOM.render(
+    root,
     document.getElementById('root')
 );
 
