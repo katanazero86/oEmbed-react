@@ -3,6 +3,45 @@
 - 담당자 : 배창현
 - 2019.03.30 : 프로젝트 구성(react)
 
+---
+
+### 몇가지 내용 정리
+1. npx
+```
+npm = node package module 
+
+npx create-react-app [my-app]  
+npx 는 무엇일까?
+npm @5.2.0 버전부터 새로 추가된 도구.
+
+npx 는 npm 을 로컬에 글로벌로 설치하지 않고 바로 1회성으로 실행할 수 있게 해주는 도구. 
+```
+
+2. package-lock.json 이란?
+```
+npm @5.x.x 버전 이상을 사용하면 생성되는 파일
+생성 시점은 npm i 하는 시점
+생성된 node_modules 정보를 package-lock.json 에 담는다. 
+
+이게 왜 생겼을까?
+
+동일한 package.json이라도 서로 다른 node_modules를 만들게 되는 경우가 생깁니다.
+1) npm의 버젼이 다른 경우
+2) 의존성을 가진 패키지의 버젼이 업그레이드 되는 경우
+3) 의존성을 가진 패키지가 의존하는 패키지의 버젼이 업그레이드 되는 경우
+
+package.json 파일의 의존성 선언에는 version range가 사용됩니다. version range란 특정 버전이 아니라 버전의 범위를 의미.
+가장 흔한 예로 npm install express를 실행하게 되면 package.json 파일에는 “^4.16.3”(Caret Ranges)로 버전 범위가 추가됩니다.
+저 package.json 파일로 npm install을 실행하면 현재는 4.16.3 버전이 설치되지만 express의 새로운 minor, patch가 publish 되면 동일한 package.json 파일로 
+npm install을 실행해도 4.17.3, 이나 4.16.4 같은 업데이트된 버전이 설치
+
+만약 package-lock.json 파일이 없다면,
+A 개발자는 4.17.3 버전이 설치된 환경에서 개발을 하고 있을거고,
+B 개발자가 clone 받아서 npm i 하면 최신버전인 4.17.4 버전이 설치가 되어
+서로 다른 의존성으로 작업을 할것임. 이러다가 누군가 작업해서 머지하고 배포를했는데..
+버전이 달라서 안돌아갈수도..ㄷㄷ
+
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
