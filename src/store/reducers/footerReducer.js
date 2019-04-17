@@ -11,8 +11,10 @@ export default function footerStore(state = initialState, action) {
                 ...state
             }
         case types.SET_FOOTER_MSG :
-            state.footerMsg = '변경';
-            break;
+            state.footerMsg = action.msg;
+            return {
+                ...state
+            }
         default :
             return initialState;
     }

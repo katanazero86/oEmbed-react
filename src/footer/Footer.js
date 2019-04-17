@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 // state manage
 import {connect} from 'react-redux';
@@ -35,6 +36,10 @@ class Footer extends Component {
         this.setState({name: event.target.value});
     };
 
+    footerStoreChange = () => {
+        this.props.setFooterMsg('setFooterMsg');
+    };
+
     render() {
         return (
             <div>
@@ -45,13 +50,16 @@ class Footer extends Component {
                         </Typography>
                         <TextField
                             id="standard-name"
-                            label="Name"
+                            label="상태값 예제"
                             className={this.props.classes.textField}
                             value={this.state.name}
                             onChange={this.handleChange}
                             margin="normal"
                         />
-                        {this.state.age}
+                        {this.state.name}
+                        <Button variant="contained" onClick={this.footerStoreChange}>
+                            footerStore 값 변경
+                        </Button>
                     </Toolbar>
                 </AppBar>
             </div>
@@ -62,7 +70,7 @@ class Footer extends Component {
 
 // store 안의 state 값을 props 로 연결
 const mapStateToProps = (state) => {
-    // console.log(state);
+    console.log(state);
     return {
         footerMsg: state.footerStore.footerMsg,
     };
@@ -77,8 +85,8 @@ const mapDispatchToProps = (dispatch) => {
         getFooterMsg: () => {
             dispatch(actions.getFooterMsg());
         },
-        setFooterMsg: () => {
-            dispatch(actions.setFooterMsg())
+        setFooterMsg: (msg) => {
+            dispatch(actions.setFooterMsg(msg));
         }
     }
 };
