@@ -33,7 +33,14 @@ class Footer extends Component {
 
     handleChange = (event) => {
         // console.log(event.target.value);
-        this.setState({name: event.target.value});
+        // this.setState({name: event.target.value});
+        console.log(event.target.value);
+        event.persist();
+        this.setState((prevState, props) => {
+           return {
+               name : event.target.value
+           }
+        });
     };
 
     footerStoreChange = () => {
