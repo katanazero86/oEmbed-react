@@ -86,7 +86,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.getFooterMsg());
         },
         setFooterMsg: (msg) => {
-            dispatch(actions.setFooterMsg(msg));
+            dispatch(actions.setFooterMsg({msg}));
         }
     }
 };

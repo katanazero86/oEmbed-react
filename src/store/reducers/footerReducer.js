@@ -11,7 +11,7 @@ export default function footerStore(state = initialState, action) {
                 ...state
             }
         case types.SET_FOOTER_MSG :
-            state.footerMsg = action.msg;
+            state.footerMsg = action.payload.msg;
             return {
                 ...state
             }

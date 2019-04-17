@@ -13,9 +13,9 @@ export function getFooterMsg() {
     }
 }
 
-export function setFooterMsg(msg) {
+export function setFooterMsg(payload) {
     return {
         type: types.SET_FOOTER_MSG,
-        msg : msg
+        payload : payload
     }
 }
