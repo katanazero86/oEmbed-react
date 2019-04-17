@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 // state manage
 import {connect} from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../store/actions';
 
 
 const styles = {
+    textField: {
+        width: 200,
+    },
     flexGrow: {
         flexGrow: 1,
     },
@@ -20,14 +24,34 @@ const styles = {
 
 
 class Footer extends Component {
+
+    state = {
+        name: '',
+        age: 100,
+    };
+
+    handleChange = (event) => {
+        // console.log(event.target.value);
+        this.setState({name: event.target.value});
+    };
+
     render() {
         return (
             <div>
                 <AppBar position="absolute" color="secondary" style={{bottom: 0, top: 'auto'}}>
                     <Toolbar>
                         <Typography variant="h6" color="inherit" className={this.props.classes.flexGrow}>
-                            스토어 : {this.props.text}
+                            Footer - {this.props.footerMsg}
                         </Typography>
+                        <TextField
+                            id="standard-name"
+                            label="Name"
+                            className={this.props.classes.textField}
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                            margin="normal"
+                        />
+                        {this.state.age}
                     </Toolbar>
                 </AppBar>
             </div>
@@ -38,9 +62,9 @@ class Footer extends Component {
 
 // store 안의 state 값을 props 로 연결
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
     return {
-        text: state.test.storeTest,
+        footerMsg: state.footerStore.footerMsg,
     };
 };
 
@@ -50,9 +74,12 @@ const mapStateToProps = (state) => {
 */
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleTest: () => {
-            dispatch(actions.test())
+        getFooterMsg: () => {
+            dispatch(actions.getFooterMsg());
         },
+        setFooterMsg: () => {
+            dispatch(actions.setFooterMsg())
+        }
     }
 };
 

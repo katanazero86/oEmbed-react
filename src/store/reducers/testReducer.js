@@ -1,6 +1,5 @@
 import * as types from '../actions/ActionTypes';
 
-
 const initialState = {
     storeTest : '나는 스토어로 고통받는다'
 };
