@@ -39,7 +39,8 @@ const Header = (props) => {
         <div className={props.classes.root}>
             <AppBar position="static" color="primary">
                 <Toolbar>
-                    <Typography variant="h6" color="inherit" className={props.classes.flexGrow} onClick={onClickHandler}>
+                    <Typography variant="h6" color="inherit" className={props.classes.flexGrow}
+                                onClick={onClickHandler}>
                         {headerMsg}
                     </Typography>
                     <Button color="inherit" size="large" onClick={() => {
