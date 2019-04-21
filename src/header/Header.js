@@ -30,7 +30,7 @@ const Header = (props) => {
     });
 
     const onClickHandler = () => {
-        // setHeaderMsg('');
+        setHeaderMsg('');
         props.history.push('/');
     };
 

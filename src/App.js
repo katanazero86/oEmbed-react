@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer} from 'react';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {Search} from '@material-ui/icons';
 
 import CardComponent from './component/CardComponent';
+
+import axios from 'axios';
 
 
 const domainItems = [
@@ -24,14 +26,31 @@ const domainItems = [
 ];
 
 
+const initialState = {
+    youtubeEndPoint: 'https://www.youtube.com/oembed?url=',
+    instagramEndPoint: 'https://api.instagram.com/oembed?url=',
+    vimeoEndPoint: 'https://vimeo.com/api/oembed.json?url=',
+};
+
+const appResucer = (state, action) => {
+    switch (action.type) {
+        default :
+            return state;
+    }
+};
+
+
 const App = (props) => {
 
     const [selectDomain, setSelectDomain] = useState('test1');
     const [searchText, setSearchText] = useState('');
 
+    const [state, dispatch] = useReducer(appResucer, initialState);
+
 
     const changeSelectDomain = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
+        dispatch({type : 'test'});
         setSelectDomain(event.target.value);
     };
 
@@ -41,9 +60,12 @@ const App = (props) => {
         }
     };
 
-    const searchOembed = (event) => {
+    const searchOembed = async (event) => {
         if (searchText) {
-            console.log('검색 시작!');
+
+            const result = await axios.get(`${state.vimeoEndPoint}${searchText}`,);
+            console.log(result);
+
         }
     };
 
@@ -76,7 +98,8 @@ const App = (props) => {
                 <Grid item xs={12}>
                     <Paper style={{padding: '10px', display: 'flex', alignItems: 'center', minWidth: '360px'}}>
                         <InputBase placeholder="Search.." value={searchText}
-                                   onChange={(e) => setSearchText(e.target.value)} onKeyUp={(e) => e.keyCode == 13 ? searchOembed() : ''}
+                                   onChange={(e) => setSearchText(e.target.value)}
+                                   onKeyUp={(e) => e.keyCode === 13 ? searchOembed() : ''}
                                    style={{flexGrow: 2}}/>
                         <IconButton aria-label="Search" onClick={clickSearch}>
                             <Search/>

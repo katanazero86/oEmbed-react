@@ -15,6 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 const store = createStore(reducers);
+// const store2 = React.createContext();
 
 const root = (
     <Provider store={store}>
