@@ -27,6 +27,7 @@ const domainItems = [
 const App = (props) => {
 
     const [selectDomain, setSelectDomain] = useState('test1');
+    const [searchText, setSearchText] = useState('');
 
 
     const changeSelectDomain = (event) => {
@@ -34,12 +35,24 @@ const App = (props) => {
         setSelectDomain(event.target.value);
     };
 
+    const clickSearch = (event) => {
+        if (searchText) {
+            searchOembed();
+        }
+    };
+
+    const searchOembed = (event) => {
+        if (searchText) {
+            console.log('검색 시작!');
+        }
+    };
+
 
     return (
-        <div style={{padding : '20px'}}>
+        <div style={{padding: '20px'}}>
             <Grid container spacing={16}>
                 <Grid item xs={12}>
-                    <Paper style={{padding : '10px', display : 'flex', alignItems: 'center', minWidth: '360px'}}>
+                    <Paper style={{padding: '10px', display: 'flex', alignItems: 'center', minWidth: '360px'}}>
                         <TextField
                             select
                             variant="outlined"
@@ -47,9 +60,10 @@ const App = (props) => {
                             value={selectDomain}
                             onChange={changeSelectDomain}
                             InputProps={{
-                                startAdornment: <InputAdornment position="start" style={{width : '100%'}}>도메인</InputAdornment>,
+                                startAdornment: <InputAdornment position="start"
+                                                                style={{width: '100%'}}>도메인</InputAdornment>,
                             }}
-                            style={{width : '100%'}}
+                            style={{width: '100%'}}
                         >
                             {domainItems.map(option => (
                                 <MenuItem key={option.value} value={option.value}>
@@ -60,23 +74,25 @@ const App = (props) => {
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <Paper style={{padding : '10px', display : 'flex', alignItems: 'center', minWidth: '360px'}}>
-                        <InputBase placeholder="Search.." style={{flexGrow: 2}} />
-                        <IconButton aria-label="Search" >
+                    <Paper style={{padding: '10px', display: 'flex', alignItems: 'center', minWidth: '360px'}}>
+                        <InputBase placeholder="Search.." value={searchText}
+                                   onChange={(e) => setSearchText(e.target.value)} onKeyUp={(e) => e.keyCode == 13 ? searchOembed() : ''}
+                                   style={{flexGrow: 2}}/>
+                        <IconButton aria-label="Search" onClick={clickSearch}>
                             <Search/>
                         </IconButton>
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
-                    <Paper style={{padding : '10px'}}>
+                    <Paper style={{padding: '10px'}}>
                         <CardComponent/>
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
-                    <Paper style={{padding : '10px'}}>xs=4</Paper>
+                    <Paper style={{padding: '10px'}}>xs=4</Paper>
                 </Grid>
                 <Grid item xs={4}>
-                    <Paper style={{padding : '10px'}}>xs=4</Paper>
+                    <Paper style={{padding: '10px'}}>xs=4</Paper>
                 </Grid>
             </Grid>
         </div>
