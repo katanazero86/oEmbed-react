@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -22,6 +22,11 @@ const styles = {
 const CardComponent = (props) => {
 
     const { classes } = props;
+
+    useEffect(()=>{
+        console.log('컨텐츠 추가');
+       console.log(props.content);
+    });
 
     return (
         <Card className={classes.card}>

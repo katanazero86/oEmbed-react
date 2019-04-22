@@ -2,9 +2,7 @@ import React, {useState, useReducer} from 'react';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-// import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
-// import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Search} from '@material-ui/icons';
@@ -12,6 +10,10 @@ import {Search} from '@material-ui/icons';
 import CardComponent from './component/CardComponent';
 
 import axios from 'axios';
+
+// state manage
+import {connect} from 'react-redux';
+import * as actions from './store/actions';
 
 
 const domainItems = [
@@ -37,7 +39,7 @@ const initialState = {
     vimeoEndPoint: 'https://vimeo.com/api/oembed.json?url=',
 };
 
-const appResucer = (state, action) => {
+const appReducer = (state, action) => {
     switch (action.type) {
         default :
             return state;
@@ -49,9 +51,7 @@ const App = (props) => {
 
     const [selectDomain, setSelectDomain] = useState('youtube');
     const [searchText, setSearchText] = useState('');
-
-    const [state, dispatch] = useReducer(appResucer, initialState);
-
+    const [state, dispatch] = useReducer(appReducer, initialState);
 
     const changeSelectDomain = (event) => {
         // console.log(event.target.value);
@@ -64,6 +64,8 @@ const App = (props) => {
             searchOembed();
         }
     };
+
+    // let contentItems = [];
 
     const searchOembed = async (event) => {
 
@@ -84,11 +86,33 @@ const App = (props) => {
                 case 'vimeo' :
                     endPoint = `${state.vimeoEndPoint}${searchText}`;
                     break;
+                default :
+                    break;
             }
 
             if (endPoint) {
                 const result = await axios.get(endPoint);
-                console.log(result);
+                if (result.status !== 200) {
+                    console.log(result);
+                } else if (result.status === 200) {
+                    // console.log(result);
+                    await props.getOembedContents();
+                    const oEmbedContents = props.oEmbedContents;
+                    oEmbedContents.push(result.data);
+                    await props.setOembedContent(oEmbedContents);
+
+                    // contentItems = props.oEmbedContents.map((content, index) => {
+                    //     return (
+                    //         <Grid item xs={12} sm={6} key={index}>
+                    //             <Paper style={{padding: '10px'}}>
+                    //                 <CardComponent content={content}/>
+                    //             </Paper>
+                    //         </Grid>
+                    //     )
+                    // });
+
+
+                }
             }
 
         }
@@ -107,10 +131,6 @@ const App = (props) => {
                             label="검색 도메인 선택"
                             value={selectDomain}
                             onChange={changeSelectDomain}
-                            // InputProps={{
-                            //     startAdornment: <InputAdornment position="start"
-                            //                                     style={{width: '50%'}}>도메인</InputAdornment>,
-                            // }}
                             style={{width: '100%'}}
                         >
                             {domainItems.map(option => (
@@ -138,15 +158,51 @@ const App = (props) => {
                         </IconButton>
                     </div>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Paper style={{padding: '10px'}}>
-                        <CardComponent/>
-                    </Paper>
-                </Grid>
+                {/*<Grid item xs={12} sm={6} >*/}
+                    {/*<Paper style={{padding: '10px'}}>*/}
+                        {/*<CardComponent />*/}
+                    {/*</Paper>*/}
+                {/*</Grid>*/}
+                {props.oEmbedContents.map((content, index) => {
+                    return (
+                        <Grid item xs={12} sm={6} >
+                            <Paper style={{padding: '10px'}}>
+                                <CardComponent />
+                            </Paper>
+                        </Grid>
+                        )
+                    })
+                }
             </Grid>
         </div>
     );
 
 };
 
-export default (App);
+
+// store 안의 state 값을 props 로 연결
+const mapStateToProps = (state) => {
+    console.log(state.oEmbedStore.oEmbedContents);
+    return {
+        oEmbedContents: state.oEmbedStore.oEmbedContents,
+    };
+};
+
+/*
+    액션 생성자를 사용하여 액션을 생성하고,
+    해당 액션을 dispatch 하는 함수를 만들은 후, 이를 props 로 연결해줍니다.
+*/
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getOembedContents: async () => {
+            await dispatch(actions.getOembedContent());
+        },
+
+        setOembedContent: async (oEmbedContents) => {
+            await dispatch(actions.setOembedContent({oEmbedContents}));
+        }
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

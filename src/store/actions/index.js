@@ -19,3 +19,17 @@ export function setFooterMsg(payload) {
         payload : payload
     }
 }
+
+
+export function setOembedContent(payload) {
+    return {
+        type : types.SET_OEMBED_CONTENT,
+        payload: payload
+    }
+}
+
+export function getOembedContent() {
+    return {
+        type : types.GET_OEMBED_CONTENT,
+    }
+}

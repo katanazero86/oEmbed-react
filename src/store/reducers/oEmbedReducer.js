@@ -1,13 +1,22 @@
-// const initialState = {
-//     youtubeEndPoint: 'http://www.youtube.com/oembed?url=',
-//     instagramEndPoint: 'https://api.instagram.com/oembed?url=',
-//     vimeoEndPoint : 'https://vimeo.com/api/oembed.json?url=',
-// };
-//
-// export default function oEmbedApiEndPointStore(state = initialState, action) {
-//     switch (action) {
-//         default : {
-//             return initialState;
-//         }
-//     }
-// }
+import * as types from '../actions/ActionTypes';
+
+const initialState = {
+    oEmbedContents: [],
+};
+
+export default function oEmbedStore(state = initialState, action) {
+    switch (action.type) {
+        case types.SET_OEMBED_CONTENT :
+            state.oEmbedContents = action.payload.oEmbedContents;
+            return {
+                ...state
+            }
+        case types.GET_OEMBED_CONTENT :
+            return {
+                ...state
+            }
+        default : {
+            return initialState;
+        }
+    }
+}
