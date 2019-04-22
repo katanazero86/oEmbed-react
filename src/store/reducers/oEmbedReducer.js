@@ -7,7 +7,7 @@ const initialState = {
 export default function oEmbedStore(state = initialState, action) {
     switch (action.type) {
         case types.SET_OEMBED_CONTENT :
-            state.oEmbedContents = action.payload.oEmbedContents;
+            state.oEmbedContents = [...action.payload.oEmbedContents];
             return {
                 ...state
             }

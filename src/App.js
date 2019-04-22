@@ -165,9 +165,9 @@ const App = (props) => {
                 {/*</Grid>*/}
                 {props.oEmbedContents.map((content, index) => {
                     return (
-                        <Grid item xs={12} sm={6} >
+                        <Grid item xs={12} sm={6} key={index}>
                             <Paper style={{padding: '10px'}}>
-                                <CardComponent />
+                                <CardComponent content={content}/>
                             </Paper>
                         </Grid>
                         )
@@ -183,6 +183,7 @@ const App = (props) => {
 // store 안의 state 값을 props 로 연결
 const mapStateToProps = (state) => {
     console.log(state.oEmbedStore.oEmbedContents);
+    console.log(state.oEmbedStore.oEmbedContents.length);
     return {
         oEmbedContents: state.oEmbedStore.oEmbedContents,
     };

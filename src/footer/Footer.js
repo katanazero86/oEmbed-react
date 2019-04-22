@@ -77,7 +77,7 @@ class Footer extends Component {
 
 // store 안의 state 값을 props 로 연결
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
     return {
         footerMsg: state.footerStore.footerMsg,
     };
