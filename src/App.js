@@ -91,28 +91,20 @@ const App = (props) => {
             }
 
             if (endPoint) {
-                const result = await axios.get(endPoint);
-                if (result.status !== 200) {
-                    console.log(result);
-                } else if (result.status === 200) {
-                    // console.log(result);
-                    await props.getOembedContents();
-                    const oEmbedContents = props.oEmbedContents;
-                    oEmbedContents.push(result.data);
-                    await props.setOembedContent(oEmbedContents);
 
-                    // contentItems = props.oEmbedContents.map((content, index) => {
-                    //     return (
-                    //         <Grid item xs={12} sm={6} key={index}>
-                    //             <Paper style={{padding: '10px'}}>
-                    //                 <CardComponent content={content}/>
-                    //             </Paper>
-                    //         </Grid>
-                    //     )
-                    // });
+                props.setOembedContent(endPoint);
 
-
-                }
+                // const result = await axios.get(endPoint);
+                // if (result.status !== 200) {
+                //     console.log(result);
+                // } else if (result.status === 200) {
+                //     // console.log(result);
+                //     await props.getOembedContents();
+                //     const oEmbedContents = props.oEmbedContents;
+                //     oEmbedContents.push(result.data);
+                //     await props.setOembedContent(oEmbedContents);
+                //
+                // }
             }
 
         }
@@ -158,21 +150,16 @@ const App = (props) => {
                         </IconButton>
                     </div>
                 </Grid>
-                {/*<Grid item xs={12} sm={6} >*/}
-                    {/*<Paper style={{padding: '10px'}}>*/}
-                        {/*<CardComponent />*/}
-                    {/*</Paper>*/}
-                {/*</Grid>*/}
-                {props.oEmbedContents.map((content, index) => {
-                    return (
-                        <Grid item xs={12} sm={6} key={index}>
-                            <Paper style={{padding: '10px'}}>
-                                <CardComponent content={content}/>
-                            </Paper>
-                        </Grid>
-                        )
-                    })
-                }
+                    {props.oEmbedContents.map((content, index) => {
+                        return (
+                            <Grid item xs={12} sm={6} key={index}>
+                                <Paper style={{padding: '10px'}}>
+                                    <CardComponent content={content}/>
+                                </Paper>
+                            </Grid>
+                                )
+                        })
+                    }
             </Grid>
         </div>
     );

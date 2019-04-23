@@ -47,10 +47,14 @@ class Footer extends Component {
         this.props.setFooterMsg('setFooterMsg');
     };
 
+    getFooterStore = () => {
+        this.props.getFooterMsg();
+    }
+
     render() {
         return (
-            <div>
-                <AppBar position="fixed" color="secondary" style={{bottom: 0, top: 'auto'}}>
+            <div style={{position: 'relative', bottom: 0, left: 0}}>
+                <AppBar position="absolute" color="secondary">
                     <Toolbar>
                         <Typography variant="h6" color="inherit" className={this.props.classes.flexGrow}>
                             Footer - {this.props.footerMsg}
@@ -66,6 +70,9 @@ class Footer extends Component {
                         {this.state.name}
                         <Button variant="contained" onClick={this.footerStoreChange}>
                             footerStore 값 변경
+                        </Button>
+                        <Button variant="contained" onClick={this.getFooterStore}>
+                            footerStore 값 가져오기
                         </Button>
                     </Toolbar>
                 </AppBar>
