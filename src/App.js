@@ -9,7 +9,7 @@ import {Search} from '@material-ui/icons';
 
 import CardComponent from './component/CardComponent';
 
-import axios from 'axios';
+// import axios from 'axios';
 
 // state manage
 import {connect} from 'react-redux';
@@ -67,7 +67,7 @@ const App = (props) => {
 
     // let contentItems = [];
 
-    const searchOembed = async (event) => {
+    const searchOembed = (event) => {
 
         // https://www.youtube.com/watch?v=Ck7Ov6YxQPs&list=RDGMEMXdNDEg4wQ96My0DhjI-cIgVMk8e2PBUw45E&index=4
         // https://vimeo.com/219312157
@@ -92,7 +92,7 @@ const App = (props) => {
 
             if (endPoint) {
 
-                props.setOembedContent(endPoint);
+                props.getOembedContent(endPoint);
 
                 // const result = await axios.get(endPoint);
                 // if (result.status !== 200) {
@@ -150,6 +150,14 @@ const App = (props) => {
                         </IconButton>
                     </div>
                 </Grid>
+                {props.loading
+                    ? <p>Loading...</p>
+                    : props.error
+                        ? <p>Error, try again</p>
+                        : <p>{props.requestURL}</p>
+                }
+
+
                     {props.oEmbedContents.map((content, index) => {
                         return (
                             <Grid item xs={12} sm={6} key={index}>
@@ -169,10 +177,8 @@ const App = (props) => {
 
 // store 안의 state 값을 props 로 연결
 const mapStateToProps = (state) => {
-    console.log(state.oEmbedStore.oEmbedContents);
-    console.log(state.oEmbedStore.oEmbedContents.length);
     return {
-        oEmbedContents: state.oEmbedStore.oEmbedContents,
+        ...state.oEmbedStore
     };
 };
 
@@ -182,13 +188,9 @@ const mapStateToProps = (state) => {
 */
 const mapDispatchToProps = (dispatch) => {
     return {
-        getOembedContents: async () => {
-            await dispatch(actions.getOembedContent());
+        getOembedContent:  (requestURL) => {
+             dispatch(actions.getOembedContent(requestURL));
         },
-
-        setOembedContent: async (oEmbedContents) => {
-            await dispatch(actions.setOembedContent({oEmbedContents}));
-        }
     }
 };
 

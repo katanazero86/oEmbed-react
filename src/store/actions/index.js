@@ -21,15 +21,23 @@ export function setFooterMsg(payload) {
 }
 
 
-export function setOembedContent(payload) {
+export function setOembedContent(result) {
     return {
         type : types.SET_OEMBED_CONTENT,
-        payload: payload
+        result,
     }
 }
 
-export function getOembedContent() {
+export function getOembedContent(requestURL) {
     return {
         type : types.GET_OEMBED_CONTENT,
+        requestURL,
+    }
+}
+
+export function failOembedContent(requestURL) {
+    return {
+        type : types.FAIL_OEMBED_CONTENT,
+        requestURL,
     }
 }
