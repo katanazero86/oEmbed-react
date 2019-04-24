@@ -12,24 +12,29 @@ function* test2() {
 function* getOembedContent(action) {
     console.log(action);
 
-    const result = yield axios.get(action.requestURL);
-    yield delay(1000);
+    try {
+        const result = yield axios.get(action.requestURL);
+        yield delay(1000);
 
-    if (result.status !== 200) {
-        console.log(result);
-        console.log('통신실패');
-        yield put({type: 'FAIL_OEMBED_CONTENT', requestURL : action.requestURL});
-
-    } else if (result.status === 200) {
-        if(result.data.hasOwnProperty('error')) {
+        if (result.status !== 200) {
             console.log(result);
             console.log('통신실패');
             yield put({type: 'FAIL_OEMBED_CONTENT', requestURL : action.requestURL});
-        } else {
-            console.log(result);
-            console.log('통신성공');
-            yield put({type : 'SET_OEMBED_CONTENT',  result : result.data});
+
+        } else if (result.status === 200) {
+            if(result.data.hasOwnProperty('error')) {
+                console.log(result);
+                console.log('통신실패');
+                yield put({type: 'FAIL_OEMBED_CONTENT', requestURL : action.requestURL});
+            } else {
+                console.log(result);
+                console.log('통신성공');
+                yield put({type : 'SET_OEMBED_CONTENT',  result : result.data});
+            }
         }
+    } catch (e) {
+        console.log(e);
+        yield put({type: 'FAIL_OEMBED_CONTENT', requestURL : action.requestURL});
     }
 
 }
