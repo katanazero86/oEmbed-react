@@ -39,11 +39,6 @@ function* getOembedContent(action) {
 
 }
 
-// function* actionWatcher() {
-//     yield takeLatest('SET_OEMBED_CONTENT', test)
-// }
-//
-
 export default function* rootSaga() {
     yield takeEvery('SET_FOOTER_MSG', test);
     yield takeEvery('GET_FOOTER_MSG', test2);

@@ -19,19 +19,21 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 const sageMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sageMiddleware));
 sageMiddleware.run(rootSaga);
-// const store2 = React.createContext();
+
 
 const root = (
     <Provider store={store}>
         <Router>
-            <Header/>
-            <div>
-                <Switch>
-                    <Route path="/" exact component={App}/>
-                    <Route path="/about" component={About}/>
-                </Switch>
+            <div style={{position : 'relative', top : '0px', left : '0px'}}>
+                <Header/>
+                <div style={{paddingBottom : '72px'}}>
+                    <Switch>
+                        <Route path="/" exact component={App}/>
+                        <Route path="/about" component={About}/>
+                    </Switch>
+                </div>
+                <Footer/>
             </div>
-            <Footer/>
         </Router>
     </Provider>
 );

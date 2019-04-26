@@ -54,7 +54,6 @@ const App = (props) => {
     const [state, dispatch] = useReducer(appReducer, initialState);
 
     const changeSelectDomain = (event) => {
-        // console.log(event.target.value);
         dispatch({type: 'test'});
         setSelectDomain(event.target.value);
     };
@@ -65,7 +64,6 @@ const App = (props) => {
         }
     };
 
-    // let contentItems = [];
 
     const searchOembed = (event) => {
 
@@ -91,20 +89,7 @@ const App = (props) => {
             }
 
             if (endPoint) {
-
                 props.getOembedContent(endPoint);
-
-                // const result = await axios.get(endPoint);
-                // if (result.status !== 200) {
-                //     console.log(result);
-                // } else if (result.status === 200) {
-                //     // console.log(result);
-                //     await props.getOembedContents();
-                //     const oEmbedContents = props.oEmbedContents;
-                //     oEmbedContents.push(result.data);
-                //     await props.setOembedContent(oEmbedContents);
-                //
-                // }
             }
 
         }
