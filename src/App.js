@@ -142,9 +142,9 @@ const App = (props) => {
                         </Grid>
 
                         {props.loading
-                            ? <Grid item xs={6} style={{textAlign : 'center'}}>Loading...</Grid>
+                            ? <Grid item xs={12} style={{textAlign : 'center'}}>Loading...</Grid>
                             : props.error
-                                ? <Grid item xs={6} style={{textAlign : 'center'}}>Error, try again({props.requestURL})</Grid>
+                                ? <Grid item xs={12} style={{textAlign : 'center'}}>Error, try again({props.requestURL})</Grid>
                                 : ''
                         }
 

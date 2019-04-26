@@ -26,7 +26,7 @@ const root = (
         <Router>
             <div style={{position : 'relative'}}>
                 <Header/>
-                <div style={{paddingBottom : '72px', paddingTop : '48px'}}>
+                <div style={{paddingBottom : '72px'}}>
                     <Switch>
                         <Route path="/" exact component={App}/>
                         <Route path="/about" component={About}/>

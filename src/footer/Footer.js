@@ -54,7 +54,7 @@ class Footer extends Component {
     render() {
         return (
             <div>
-                <AppBar position="absolute" color="secondary" style={{top : 'auto', bottom : '0px', left : '0px', right: '0px', width : '100%'}}>
+                <AppBar position="absolute" color="secondary" style={{top : 'auto', bottom : '0px'}}>
                     <Toolbar variant="dense">
                         <Typography variant="h6" color="inherit" className={this.props.classes.flexGrow}>
                             Footer - {this.props.footerMsg}
