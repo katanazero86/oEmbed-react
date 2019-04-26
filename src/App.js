@@ -99,60 +99,69 @@ const App = (props) => {
     return (
         <div style={{padding: '20px'}}>
             <Grid container spacing={16} direction="row" justify="center" alignItems="center">
-                <Grid item xs={12} sm={6}>
-                    <div style={{padding: '5px', display: 'flex', alignItems: 'center'}}>
-                        <TextField
-                            select
-                            variant="outlined"
-                            margin="dense"
-                            label="검색 도메인 선택"
-                            value={selectDomain}
-                            onChange={changeSelectDomain}
-                            style={{width: '100%'}}
-                        >
-                            {domainItems.map(option => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </div>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <div style={{padding: '5px', display: 'flex', alignItems: 'center'}}>
-                        <TextField
-                            label="Search URL.."
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                            autoFocus
-                            fullWidth
-                            margin="dense"
-                            onKeyUp={(e) => e.keyCode === 13 ? searchOembed() : ''}
 
-                        />
-                        <IconButton aria-label="Search" onClick={clickSearch}>
-                            <Search/>
-                        </IconButton>
-                    </div>
-                </Grid>
-                {props.loading
-                    ? <p>Loading...</p>
-                    : props.error
-                        ? <p>Error, try again</p>
-                        : <p>{props.requestURL}</p>
-                }
+                <Grid item xs={12}>
 
+                    <Grid spacing={16} container direction="row" justify="center" alignItems="stretch">
 
-                    {props.oEmbedContents.map((content, index) => {
-                        return (
-                            <Grid item xs={12} sm={6} key={index}>
-                                <Paper style={{padding: '10px'}}>
-                                    <CardComponent content={content}/>
-                                </Paper>
-                            </Grid>
-                                )
+                        <Grid item xs={12} sm={6}>
+                            <div style={{padding: '5px', display: 'flex', alignItems: 'center'}}>
+                                <TextField
+                                    select
+                                    variant="outlined"
+                                    margin="dense"
+                                    label="검색 도메인 선택"
+                                    value={selectDomain}
+                                    onChange={changeSelectDomain}
+                                    style={{width: '100%'}}
+                                >
+                                    {domainItems.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <div style={{padding: '5px', display: 'flex', alignItems: 'center'}}>
+                                <TextField
+                                    label="Search URL.."
+                                    value={searchText}
+                                    onChange={(e) => setSearchText(e.target.value)}
+                                    autoFocus
+                                    fullWidth
+                                    margin="dense"
+                                    onKeyUp={(e) => e.keyCode === 13 ? searchOembed() : ''}
+
+                                />
+                                <IconButton aria-label="Search" onClick={clickSearch}>
+                                    <Search/>
+                                </IconButton>
+                            </div>
+                        </Grid>
+
+                        {props.loading
+                            ? <Grid item xs={6} style={{textAlign : 'center'}}>Loading...</Grid>
+                            : props.error
+                                ? <Grid item xs={6} style={{textAlign : 'center'}}>Error, try again({props.requestURL})</Grid>
+                                : ''
+                        }
+
+                        {props.oEmbedContents.map((content, index) => {
+                            return (
+                                <Grid item xs={12} sm={6} key={index}>
+                                    <Paper style={{padding: '10px'}}>
+                                        <CardComponent content={content}/>
+                                    </Paper>
+                                </Grid>
+                            )
                         })
-                    }
+                        }
+                    </Grid>
+
+                </Grid>
+
             </Grid>
         </div>
     );
@@ -173,8 +182,8 @@ const mapStateToProps = (state) => {
 */
 const mapDispatchToProps = (dispatch) => {
     return {
-        getOembedContent:  (requestURL) => {
-             dispatch(actions.getOembedContent(requestURL));
+        getOembedContent: (requestURL) => {
+            dispatch(actions.getOembedContent(requestURL));
         },
     }
 };

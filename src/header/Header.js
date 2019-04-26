@@ -34,7 +34,7 @@ const Header = (props) => {
 
     return (
         <div className={props.classes.root}>
-            <AppBar position="static" color="primary">
+            <AppBar position="absolute" color="primary">
                 <Toolbar variant="dense">
                     <Typography variant="h6" color="inherit" className={props.classes.flexGrow}
                                 onClick={onClickHandler}>

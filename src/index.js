@@ -24,9 +24,9 @@ sageMiddleware.run(rootSaga);
 const root = (
     <Provider store={store}>
         <Router>
-            <div style={{position : 'relative', top : '0px', left : '0px'}}>
+            <div style={{position : 'relative'}}>
                 <Header/>
-                <div style={{paddingBottom : '72px'}}>
+                <div style={{paddingBottom : '72px', paddingTop : '48px'}}>
                     <Switch>
                         <Route path="/" exact component={App}/>
                         <Route path="/about" component={About}/>
