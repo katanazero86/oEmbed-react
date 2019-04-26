@@ -9,6 +9,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+// state manage
+import {connect} from 'react-redux';
+import * as actions from '../store/actions';
+
 
 const styles = {
     card: {
@@ -25,11 +29,17 @@ const CardComponent = (props) => {
 
     useEffect(() => {
         console.log(props.content);
+        console.log(props.itemIndex);
     });
 
     const cardActionClick = () => {
         console.log(props.content['author_url']);
         window.open(props.content['author_url'], '_blank');
+    };
+
+    const cardDeleteClick = () => {
+      // console.log(props.itemIndex);
+      props.deleteCard(props.itemIndex);
     };
 
     return (
@@ -61,16 +71,26 @@ const CardComponent = (props) => {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={cardDeleteClick}>
                     Delete
                 </Button>
             </CardActions>
         </Card>
     );
-}
+};
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteCard: (itemIndex) => {
+            dispatch(actions.deleteOembedContent(itemIndex));
+        },
+    }
+};
+
 
 CardComponent.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CardComponent);
+export default withStyles(styles)(connect(null, mapDispatchToProps)(CardComponent));

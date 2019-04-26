@@ -30,6 +30,13 @@ export default function oEmbedStore(state = initialState, action) {
                 error : true,
                 requestURL: action.requestURL
             }
+        case types.DELETE_OEMBED_CONTENT :
+            state.oEmbedContents.splice(action.itemIndex, 1);
+            return {
+                oEmbedContents : [...state.oEmbedContents],
+                loading: false,
+                error: false,
+            }
         default : {
             return initialState;
         }

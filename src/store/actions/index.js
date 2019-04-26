@@ -41,3 +41,10 @@ export function failOembedContent(requestURL) {
         requestURL,
     }
 }
+
+export function deleteOembedContent(itemIndex) {
+    return {
+        type : types.DELETE_OEMBED_CONTENT,
+        itemIndex,
+    }
+}

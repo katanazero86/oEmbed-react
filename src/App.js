@@ -152,7 +152,7 @@ const App = (props) => {
                             return (
                                 <Grid item xs={12} sm={6} key={index}>
                                     <Paper style={{padding: '10px'}}>
-                                        <CardComponent content={content}/>
+                                        <CardComponent content={content} itemIndex={index}/>
                                     </Paper>
                                 </Grid>
                             )
