@@ -9,9 +9,9 @@ import reducers from './store/reducers'
 
 import './index.css';
 import App from './App';
-import About from './about/About';
-import Header from './header/Header';
-import Footer from './footer/Footer';
+import About from './page/about/About';
+import Header from './page/header/Header';
+import Footer from './page/footer/Footer';
 import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';

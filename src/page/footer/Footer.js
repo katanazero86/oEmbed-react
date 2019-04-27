@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 
 // state manage
 import {connect} from 'react-redux';
-import * as actions from '../store/actions';
+import * as actions from '../../store/actions/index';
 
 
 const styles = {
